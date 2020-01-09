@@ -4,7 +4,6 @@ import './people-page.css';
 import ItemList from "../item-list";
 import PersonDetails from "../person-details";
 import ErrorIndicator from "../error-indicator";
-import ErrorButton from "../error-button";
 
 export default class PeoplePage extends Component
 {
@@ -41,7 +40,6 @@ export default class PeoplePage extends Component
                 </div>
                 <div className="col-md-6">
                     <PersonDetails personId = {this.state.selectedPerson} />
-                    <ErrorButton />
                 </div>
             </div>
         );
