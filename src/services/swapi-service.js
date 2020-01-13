@@ -2,7 +2,7 @@ export default class SwapiService {
 
     _apiBase = 'https://swapi.co/api';
 
-    async getResource(url) {
+    getResource = async  (url) => {
         const res = await fetch(`${this._apiBase}${url}`);
 
         if (!res.ok) {
@@ -11,44 +11,44 @@ export default class SwapiService {
 
         const body = await res.json();
         return body;
-    }
+    };
 
-    async getAllPeople() {
+    getAllPeople = async () => {
         const res = await this.getResource(`/people/`);
         return res.results
             .map(this._transformPerson)
-            .slice(0, 8);
-    }
+            .slice(0, 5);
+    };
 
-    async getPerson(id) {
+    getPerson = async (id) => {
         const person = await this.getResource(`/people/${id}`);
         return this._transformPerson(person);
-    }
+    };
 
-    async getAllPlanets() {
+    getAllPlanets = async () => {
         const res = await this.getResource(`/planets/`);
         return res.results.map(this._transformPlanet);
-    }
+    };
 
-    async getPlanet(id) {
+    getPlanet = async (id) => {
         const planet = await this.getResource(`/planets/${id}`);
         return this._transformPlanet(planet);
-    }
+    };
 
-    async getAllStarShips() {
+    getAllStarShips = async () => {
         const res = await this.getResource(`/starships/`);
         return res.results.map(this._transformStarship);
     }
 
-    async getStarShip(id) {
+    getStarShip = async (id) => {
         const starship = await this.getResource(`/starships/${id}`);
         return this._transformStarship(starship);
-    }
+    };
 
-    _extractId(item) {
+    _extractId = (item) => {
         const idRegExp = /\/([0-9]*)\/$/;
         return  item.url.match(idRegExp)[1];
-    }
+    };
 
     _transformPlanet = (planet) => {
         return {
@@ -65,8 +65,8 @@ export default class SwapiService {
             id: this._extractId(person),
             name: person.name,
             gender: person.gender,
-            birthYear: person.birthYear,
-            eyeColor: person.eyeColor
+            birthYear: person.birth_year,
+            eyeColor: person.eye_color
         };
     };
 
