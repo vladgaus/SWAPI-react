@@ -9,7 +9,6 @@ const withData = (View, getData) => {
         };
 
         componentDidMount() {
-
             getData()
                 .then((data) => {
                     this.setState({
@@ -17,23 +16,6 @@ const withData = (View, getData) => {
                     });
                 });
         };
-
-        renderItems(arr) {
-            return arr.map((item) => {
-                const {id} = item;
-                const label = this.props.children(item);
-
-                return(
-                    <li className="list-group-item"
-                        key = {id}
-                        onClick={() => this.props.onItemSelected(id)}
-                    >
-                        {label}
-                    </li>
-                );
-            });
-        }
-
 
         render() {
 

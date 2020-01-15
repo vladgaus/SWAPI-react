@@ -38,19 +38,19 @@ export default class SwapiService {
 
     getAllStarShips = async () => {
         const res = await this.getResource(`/starships/`);
-        return res.results.map(this._transformStarship);
+        return res.results.map(this._transformStarShip);
     }
 
     getStarShip = async (id) => {
         const starship = await this.getResource(`/starships/${id}`);
-        return this._transformStarship(starship);
+        return this._transformStarShip(starship);
     };
 
     getPersonImage = ({id}) => {
         return `${this._imageBase}/characters/${id}.jpg`
     };
 
-    getStarshipImage = ({id}) => {
+    getStarShipImage = ({id}) => {
         return `${this._imageBase}/starships/${id}.jpg`;
     };
 
@@ -83,7 +83,7 @@ export default class SwapiService {
         };
     };
 
-    _transformStarship = (starship) => {
+    _transformStarShip = (starship) => {
         return {
             id: this._extractId(starship),
             name: starship.name,
