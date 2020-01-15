@@ -85,10 +85,11 @@ export default class App extends Component {
                     <div className="col-md-6">
                         <ItemList
                             onItemSelected = {this.onPeronSelected}
-                            getData = {this.swapiService.getAllPlanets}
+                            getData = {this.swapiService.getAllPeople}
                         >
                             { ({name}) => <span>{name}</span> }
                         </ItemList>
+
                     </div>
 
                 </div>
