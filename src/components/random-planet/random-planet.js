@@ -4,11 +4,27 @@ import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
 import './random-planet.css';
+import ItemList from "../item-list";
 
 
 export default class RandomPlanet extends Component {
 
     swapiService = new SwapiService();
+
+    static defaultProps = {
+        updateInterval: 100000
+    };
+
+    static propTypes = {
+        updateInterval: (props, propName, componentName) => {
+            const value = props[propName];
+            if (typeof value === 'number' && !isNaN(value)) {
+                return null;
+            }
+
+            return new TypeError(`${componentName}: ${propName} must be a number`);
+        }
+    };
 
     state = {
         planet: {},
@@ -36,8 +52,9 @@ export default class RandomPlanet extends Component {
     };
 
     componentDidMount() {
+        const {updateInterval} = this.props;
         this.updatePlanet();
-        this.interval = setInterval(this.updatePlanet, 1000000);
+        this.interval = setInterval(this.updatePlanet, updateInterval);
     }
 
     componentWillUnmount() {
