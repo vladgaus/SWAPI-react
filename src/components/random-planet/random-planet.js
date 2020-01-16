@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SwapiService from "../../services/swapi-service";
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
 import './random-planet.css';
-import ItemList from "../item-list";
-
 
 export default class RandomPlanet extends Component {
 
@@ -16,14 +15,7 @@ export default class RandomPlanet extends Component {
     };
 
     static propTypes = {
-        updateInterval: (props, propName, componentName) => {
-            const value = props[propName];
-            if (typeof value === 'number' && !isNaN(value)) {
-                return null;
-            }
-
-            return new TypeError(`${componentName}: ${propName} must be a number`);
-        }
+        updateInterval: PropTypes.number
     };
 
     state = {
