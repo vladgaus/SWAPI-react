@@ -16,6 +16,7 @@
 
 .header a:hover {
     text-decoration: none;
+    color: #fff;
 }
 
 .header h3 a {
@@ -27,5 +28,6 @@
 }
 .header button {
     height: 2.2rem;
-    margin-top: 3px;
+    margin-top: 2px;
+    margin-left: 5px;
 }
