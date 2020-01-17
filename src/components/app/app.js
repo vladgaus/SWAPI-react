@@ -5,7 +5,13 @@ import SwapiService from "../../services/swapi-service";
 import DummySwapiService from '../../services/dummy-swapi-service';
 import ErrorBoundry from "../error-boundry";
 import {SwapiServiceProvider} from "../swapi-service-context";
-import {PeoplePage, PlanetsPage, StarShipsPage} from '../pages';
+import {
+    PeoplePage,
+    PlanetsPage,
+    StarShipsPage,
+    LoginPage,
+    SecretPage
+} from '../pages';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import './app.css';
 import StarShipDetails from "../sw-components/starhip-detail";
@@ -13,7 +19,14 @@ import StarShipDetails from "../sw-components/starhip-detail";
 export default class App extends Component {
 
     state = {
-        swapiService: new SwapiService()
+        swapiService: new SwapiService(),
+        isLoggedIn: false
+    };
+
+    onLogin = () => {
+      this.setState({
+          isLoggedIn: true
+      })
     };
 
     onServiceChange = () => {
@@ -28,7 +41,7 @@ export default class App extends Component {
     };
 
     render() {
-
+        const {isLoggedIn} = this.state;
         return (
             <ErrorBoundry>
                 <SwapiServiceProvider value={this.state.swapiService}>
@@ -51,6 +64,21 @@ export default class App extends Component {
                                     const {id} = match.params;
                                     return <StarShipDetails itemId = {id} />;
                                 }}
+                            />
+                            <Route
+                                path = "/login"
+                                render = {() => (
+                                    <LoginPage
+                                        isLoggedIn={isLoggedIn}
+                                        onLogin={this.onLogin}
+                                    />
+                                )}
+                            />
+                            <Route
+                                path = "/secret"
+                                render = {() => (
+                                    <SecretPage isLoggedIn={isLoggedIn} />
+                                )}
                             />
 
                         </div>
